@@ -7,7 +7,7 @@ exports.validateUser = (req, res) => {
   if (bd_usuario.contrasena === contrasena) {
     res.status(200).json({status: 'AUTHORIZED'});
   } else {
-    res.status(401).json({status: 'UNAUTHORIZED'})
+    res.status(401).json({status: 'UNAUTHORIZED'});
   }
 };
 
@@ -17,13 +17,9 @@ exports.registerUser = (req, res) => {
   if (nombre || usuario || contrasena || correo) {
     users.push(req.body);
     console.log('arreglo: ',users);
-    res.status(201).json({
-      status: "CREATED"
-    });
+    res.status(201).json({status: "CREATED"});
   } else {
-    res.status(203).json({
-      status: "NO_CREATED"
-    });
+    res.status(203).json({status: "NO_CREATED"});
   }
 };
 
