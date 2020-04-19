@@ -14,10 +14,16 @@ exports.validateUser = (req, res) => {
 exports.registerUser = (req, res) => {
   req.body.id = users.length + 1;
   const {nombre, usuario, contrasena, correo} = req.body;
-  users.push(req.body);
-  console.log('arreglo: ',users);
-  res.status(201).json({
-    status: "CREATED"
-  });
+  if (nombre || usuario || contrasena || correo) {
+    users.push(req.body);
+    console.log('arreglo: ',users);
+    res.status(201).json({
+      status: "CREATED"
+    });
+  } else {
+    res.status(203).json({
+      status: "NO_CREATED"
+    });
+  }
 };
 
