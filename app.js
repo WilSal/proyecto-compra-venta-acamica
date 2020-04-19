@@ -6,9 +6,15 @@ const userRouter = require("./routes/userRoutes");
 
 app.use(bodyParser.json());
 
-app.use("/users", userRouter);
+app.use((_, res, next) => { 
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header( "Access-Control-Allow-Headers", 
+  "Origin, X-Requested-With, Content-Type, Accept" );
+  next(); }); 
 
-const port = 3000;
+app.use("/usuarios", userRouter);
+
+const port = 3002;
 app.listen(port, () => {
   console.log("Servidor ejecutado");
 });
