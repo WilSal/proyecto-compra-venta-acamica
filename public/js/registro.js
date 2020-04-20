@@ -33,7 +33,7 @@ var sesion = function() {
     let contrasena = document.getElementById('contrasenav').value;
 
 
-    var usuarioi = { usuariov, contrasenav, };
+    var usuarioi = { usuario, contrasena, };
 
     fetch("http://localhost:3002/usuarios/validarusuario", {
             method: "post",
