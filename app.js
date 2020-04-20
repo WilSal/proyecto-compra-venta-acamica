@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const app = express();
 
 const userRouter = require("./routes/userRoutes");
+const productRouter = require("./routes/productRoutes");
 
 app.use(bodyParser.json());
 
@@ -13,6 +14,7 @@ app.use((_, res, next) => {
   next(); }); 
 
 app.use("/usuarios", userRouter);
+app.use("/productos", productRouter);
 
 const port = 3002;
 app.listen(port, () => {
