@@ -47,6 +47,12 @@ var sesion = function() {
         })
         .then((data) => {
             console.log(data);
+            if(data.status === "AUTHORIZED") {
+                window.location.href = './productos.html';
+            }
+            else {
+                console.log(data);
+            }
         });
 
 }
