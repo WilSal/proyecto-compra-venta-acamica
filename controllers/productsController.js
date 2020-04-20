@@ -5,13 +5,12 @@ exports.getProducts = (req, res) => {
 };
 
 exports.createProduct = (req, res) => {
-    const {nombre, descripcion, disponible, comprador, vendedor} = req.body;
+    const {nombre, descripcion, disponible } = req.body;
     req.body.id = products.length + 1;
-
-    if (nombre || descripcion || disponible || comprador || vendedor) {
+    if (nombre || descripcion || disponible ) {
         products.push(req.body);
         console.log('arreglo: ',products);
-        res.status(201).json({status: "CREATED"});
+        res.status(201).json({status: "CREATED", data: req.body});
       } else {
         res.status(203).json({status: "NO_CREATED"});
       }
