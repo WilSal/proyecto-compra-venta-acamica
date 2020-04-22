@@ -25,13 +25,11 @@ function cargarProductos() {
       return response.json();
     })
     .then((data) => {
-      actualizarProductos(data);
+      actualizarProductos(data.data);
     });
 }
 
 function actualizarProductos(ProductData) {
-  console.log(ProductData);
-
   let child = document.createElement("div");
 
   for (let i = 0; i < ProductData.length; i++) {
@@ -42,6 +40,7 @@ function actualizarProductos(ProductData) {
                 </div>
                 <div class="product_description">${ProductData[i].descripcion}</div>
             </div>`;
+            
     listaProductos.appendChild(child);
   }
 }

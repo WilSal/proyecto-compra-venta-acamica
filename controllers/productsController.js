@@ -1,34 +1,41 @@
-const Productos = require('../models/productModel');
+const Productos = require("../models/productModel");
 
 exports.getProducts = (req, res) => {
-    // res.status(200).json(products);
+  Productos.find().then((productos) => {
+    res.json({
+      success: true,
+      message: "Productos Disponibles",
+      data: productos,
+    });
+  });
 };
 
 exports.createProduct = (req, res) => {
-    const {nombre, descripcion, disponible } = req.body;
-    console.log("create prouct ejecutado")
-    if (nombre || descripcion || disponible ) {
-        const producto = new Productos({
-            nombre,
-            descripcion,
-            disponible,
-            comprador: "no",
-            vendedor: "test",
-          });
-        res.status(201).json({ status: "CREATED", data: producto })
-      } else {
-        res.status(203).json({status: "NO_CREATED"});
-      }
+  const { nombre, descripcion, disponible } = req.body;
+  
+  if (nombre || descripcion || disponible) {
+    const producto = new Productos(req.body);
+    producto.save();
+    res.status(201).json({
+      success: true,
+      message: "Producto creado correctamente",
+      data: producto,
+    });
+  } else {
+    res.status(203).json({
+      success: false,
+      message: "Verificar producto",
+    });
+  }
 };
 
 exports.purchaseProduct = (req, res) => {
-    // const {id, comprador} = req.body;
-
-    // if (id || comprador){
-    //     let bd_product = products.find(obj => obj.id === id);
-    //     bd_product.comprador = comprador;
-    //     res.status(200).json({status: 'PURCHASED'});
-    // } else {
-    //     res.status(400).json({status: 'BAD_REQUEST'});
-    // }
+  // const {id, comprador} = req.body;
+  // if (id || comprador){
+  //     let bd_product = products.find(obj => obj.id === id);
+  //     bd_product.comprador = comprador;
+  //     res.status(200).json({status: 'PURCHASED'});
+  // } else {
+  //     res.status(400).json({status: 'BAD_REQUEST'});
+  // }
 };

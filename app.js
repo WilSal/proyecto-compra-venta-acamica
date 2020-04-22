@@ -6,6 +6,7 @@ const userRouter = require("./routes/userRoutes");
 const productRouter = require("./routes/productRoutes");
 
 app.use(bodyParser.json());
+app.use(express.static('public'))
 
 app.use((_, res, next) => { 
   res.header("Access-Control-Allow-Origin", "*");
