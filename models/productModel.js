@@ -8,6 +8,7 @@ mongoose.connect("mongodb://localhost:27017/tienda", {
 const Productos = mongoose.model('Productos', {
     nombre: String,
     descripcion: String,
+    precio: Number,
     disponible: Boolean,
     comprador: String,
     vendedor: String,

@@ -11,10 +11,16 @@ exports.getProducts = (req, res) => {
 };
 
 exports.createProduct = (req, res) => {
-  const { nombre, descripcion, disponible } = req.body;
+  const { nombre, descripcion, precio, disponible, comprador, vendedor } = req.body;
   
-  if (nombre || descripcion || disponible) {
-    const producto = new Productos(req.body);
+  if (nombre || descripcion ||  precio || disponible) {
+    const producto = new Productos({
+      nombre,
+      descripcion,
+      precio,
+      comprador,
+      vendedor,
+    });
     producto.save();
     res.status(201).json({
       success: true,

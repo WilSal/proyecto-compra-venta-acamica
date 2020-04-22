@@ -1,5 +1,6 @@
 const nombreProducto = document.getElementById("nombreProducto");
 const descripcionProducto = document.getElementById("descripcionProducto");
+const precioProducto = document.getElementById("precioProducto");
 const crearProducto = document.getElementById("crearProducto");
 const listaProductos = document.getElementById("listaProductos");
 
@@ -39,8 +40,9 @@ function actualizarProductos(ProductData) {
                     <span id="elemento">${ProductData[i].nombre}</span>
                 </div>
                 <div class="product_description">${ProductData[i].descripcion}</div>
+                <div class="product_price">${ProductData[i].precio}</div>
             </div>`;
-            
+
     listaProductos.appendChild(child);
   }
 }
@@ -49,11 +51,13 @@ crearProducto.addEventListener("click", function () {
   var producto = {
     nombre: nombreProducto.value,
     descripcion: descripcionProducto.value,
+    precio: precioProducto.value,
     disponible: true,
     comprador: null,
     vendedor: null,
   };
   enviarProducto(producto);
+  location.reload();
 });
 
 window.addEventListener("load", function () {
