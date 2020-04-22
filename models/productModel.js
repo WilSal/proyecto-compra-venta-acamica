@@ -1,3 +1,13 @@
-const products = [];
+const mongoose = require("mongoose");
 
-module.exports = products;
+mongoose.connect('mongodb://localhost/27017/tienda', { useNewUrlParser: true });
+
+const Productos = mongoose.model('Productos', {
+    nombre: String,
+    descripcion: String,
+    disponible: Boolean,
+    comprador: String,
+    vendedor: String,
+})
+
+module.exports = Productos;

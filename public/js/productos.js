@@ -55,7 +55,6 @@ crearProducto.addEventListener("click", function () {
     vendedor: null,
   };
   enviarProducto(producto);
-  location.reload();
 });
 
 window.addEventListener("load", function () {
