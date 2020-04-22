@@ -1,25 +1,48 @@
-const users = require("./../models/userModel");
+const Usuarios = require("../models/userModel");
 
 exports.validateUser = (req, res) => {
   const {usuario, contrasena} = req.body;
-  const bd_usuario = users.find(obj => obj.usuario === usuario);
-
-  if (bd_usuario.contrasena === contrasena) {
-    res.status(200).json({status: 'AUTHORIZED'});
-  } else {
-    res.status(401).json({status: 'UNAUTHORIZED'});
-  }
+  const bd_usuario = Usuarios.find({ usuario, contrasena}).then((usuario) => {
+    if(usuario.length > 0){
+      res.json({
+        success: true,
+        message: "Usuario autenticado",
+      });
+    }
+    else {
+      res.json({
+        success: false,
+        message: "Usuario invalido",
+      });
+    }
+  }).catch((error) => {
+    res.statis(400).json({
+      success: false,
+      message: "Error" + error,
+    });
+  })
 };
 
 exports.registerUser = (req, res) => {
-  req.body.id = users.length + 1;
   const {nombre, usuario, contrasena, correo} = req.body;
   if (nombre || usuario || contrasena || correo) {
-    users.push(req.body);
-    console.log('arreglo: ',users);
-    res.status(201).json({status: "CREATED"});
+    const usuarioNuevo = new Usuarios({
+      nombre,
+      usuario,
+      contrasena,
+      correo
+    });
+    usuarioNuevo.save();
+    res.status(201).json({
+      success: true,
+      message: "Usuario registrado correctamente",
+      data: usuario,
+    });
   } else {
-    res.status(203).json({status: "NO_CREATED"});
+    res.status(203).json({
+      success: false,
+      message: "Verificar registro",
+    });
   }
 };
 

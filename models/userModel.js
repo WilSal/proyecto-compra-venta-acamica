@@ -1,9 +1,15 @@
-const users = [{
-    id: 1,
-    usuario: 'pepito',
-    contrasena: 'pepito123',
-    nombre: 'Pepito Perez',
-    correo: 'pepito@gmail.com'
-}];
+const mongoose = require("mongoose");
 
-module.exports = users;
+mongoose.connect("mongodb://localhost:27017/tienda", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
+const Usuarios = mongoose.model('Usuarios', {
+    usuario: String,
+    contrasena: String,
+    nombre: String,
+    correo: String,
+})
+
+module.exports = Usuarios;
