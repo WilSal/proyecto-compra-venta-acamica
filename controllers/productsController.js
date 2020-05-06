@@ -1,29 +1,57 @@
-const products = require('../models/productModel');
+const Productos = require('../models/productModel');
 
 exports.getProducts = (req, res) => {
-    res.status(200).json(products);
+  Productos.find()
+    .then((productos) => {
+      res.json({
+        success: true,
+        message: 'Productos Disponibles',
+        data: productos,
+      });
+    })
+    .catch((error) => {
+      res.status(400).json({
+        success: false,
+        message: error,
+      });
+    });
 };
 
-exports.createProduct = (req, res) => {
-    const {nombre, descripcion, disponible } = req.body;
-    req.body.id = products.length + 1;
-    if (nombre || descripcion || disponible ) {
-        products.push(req.body);
-        console.log('arreglo: ',products);
-        res.status(201).json({status: "CREATED", data: req.body});
-      } else {
-        res.status(203).json({status: "NO_CREATED"});
-      }
-};
+exports.createProduct = async (req, res) => {
+  try {
+    const {
+      nombre,
+      descripcion,
+      precio,
+      disponible,
+      comprador,
+      vendedor,
+    } = req.body;
 
-exports.purchaseProduct = (req, res) => {
-    const {id, comprador} = req.body;
-
-    if (id || comprador){
-        let bd_product = products.find(obj => obj.id === id);
-        bd_product.comprador = comprador;
-        res.status(200).json({status: 'PURCHASED'});
+    if (nombre || descripcion || precio || disponible) {
+      const producto = new Productos({
+        nombre,
+        descripcion,
+        precio,
+        comprador,
+        vendedor,
+      });
+      await producto.save();
+      res.status(201).json({
+        success: true,
+        message: 'Producto creado correctamente',
+        data: producto,
+      });
     } else {
-        res.status(400).json({status: 'BAD_REQUEST'});
+      res.status(203).json({
+        success: false,
+        message: 'Verificar producto',
+      });
     }
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      message: error,
+    });
+  }
 };

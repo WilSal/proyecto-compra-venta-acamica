@@ -1,3 +1,4 @@
+require('./dataBase');
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
@@ -6,6 +7,7 @@ const userRouter = require("./routes/userRoutes");
 const productRouter = require("./routes/productRoutes");
 
 app.use(bodyParser.json());
+app.use(express.static('public'))
 
 app.use((_, res, next) => { 
   res.header("Access-Control-Allow-Origin", "*");

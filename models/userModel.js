@@ -1,9 +1,10 @@
-const users = [{
-    id: 1,
-    usuario: 'pepito',
-    contrasena: 'pepito123',
-    nombre: 'Pepito Perez',
-    correo: 'pepito@gmail.com'
-}];
+const mongoose = require("mongoose");
 
-module.exports = users;
+const Usuarios = mongoose.model('Usuarios', {
+    usuario: String,
+    contrasena: String,
+    nombre: String,
+    correo: String,
+})
+
+module.exports = Usuarios;

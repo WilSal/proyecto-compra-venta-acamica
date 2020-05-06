@@ -6,6 +6,5 @@ router
     .route("/")
     .get(productController.getProducts)
     .post(productController.createProduct)
-    .put(productController.purchaseProduct);
 
 module.exports = router;

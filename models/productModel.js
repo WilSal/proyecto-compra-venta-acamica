@@ -1,3 +1,12 @@
-const products = [];
+const mongoose = require("mongoose");
 
-module.exports = products;
+const Productos = mongoose.model('Productos', {
+    nombre: String,
+    descripcion: String,
+    precio: Number,
+    disponible: Boolean,
+    comprador: String,
+    vendedor: String,
+})
+
+module.exports = Productos;
