@@ -1,13 +1,4 @@
-const mongoose = require('mongoose');
+const Sequelize = require('sequelize');
+const sequelize = new Sequelize('mysql://master_wilfer:)&VvNidySKa_@automosaiko.tk:3306/master_compra_venta');
 
-const URI =
-  'mongodb+srv://acamica:acamica@cluster0-kzxek.azure.mongodb.net/acamicaTiendaDb?retryWrites=true&w=majority';
-
-mongoose
-  .connect(URI, {
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => console.log('Conectada a la Base de Datos Exitosamente'))
-  .catch((err) => console.log(err));
+module.exports = sequelize;

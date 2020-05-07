@@ -30,18 +30,10 @@ exports.registerUser = async (req, res) => {
     const { nombre, usuario, contrasena, correo } = req.body;
 
     if (nombre || usuario || contrasena || correo) {
-      const usuarioNuevo = new Usuarios({
-        nombre,
-        usuario,
-        contrasena,
-        correo,
-      });
-      await usuarioNuevo.save();
-
+      await Usuarios.crearUsuario(nombre , usuario , contrasena , correo);
       res.status(201).json({
         success: true,
-        message: 'Usuario registrado correctamente',
-        data: usuarioNuevo,
+        message: 'Usuario registrado correctamente'
       });
     } else {
       res.status(203).json({
